@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#111;overflow:hidden;-webkit-tap-highlight-color:transparent}
+input{font-family:inherit}
+input:focus{outline:none}
+@keyframes danmuFly{from{transform:translateX(380px)}to{transform:translateX(-360px)}}
+</style>
+</helmet>
+
+<template id="__bundler_thumbnail" data-bg-color="#1a1a2e">
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="800" fill="#1a1a2e"/>
+<circle cx="470" cy="400" r="60" fill="none" stroke="#e0571f" stroke-width="10" opacity="0.5"/>
+<path d="M600 360c-22-40-90-34-90 14 0 40 60 70 90 96 30-26 90-56 90-96 0-48-68-54-90-14z" fill="#e0571f"/>
+<circle cx="730" cy="400" r="60" fill="none" stroke="#e0571f" stroke-width="10" opacity="0.5"/>
+<text x="600" y="560" font-family="sans-serif" font-size="46" font-weight="900" fill="#ffffff" text-anchor="middle">Ship or Swipe</text>
+</svg>
+</template>
+<div style="width:393px;height:852px;margin:0 auto;background:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;font-family:'Noto Sans SC',system-ui,-apple-system,sans-serif;user-select:none">
+
+<div style="height:54px;background:#fff;display:flex;align-items:flex-end;justify-content:space-between;padding:0 28px 10px;font-size:12px;font-weight:600;color:#1a1a1a;flex-shrink:0;z-index:10">
+<span>9:41</span>
+<div style="display:flex;gap:4px;align-items:center;font-size:11px;color:#333"><span>●●●●</span><span style="font-size:14px">⊠</span></div>
+</div>
+
+<sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ back }}" style="position:absolute;top:54px;left:10px;width:34px;height:34px;border-radius:10px;background:rgba(0,0,0,.05);display:flex;align-items:center;justify-content:center;font-size:22px;color:#333;cursor:pointer;z-index:120;line-height:1;padding-bottom:3px">‹</div>
+</sc-if>
+
+<div style="flex:1;overflow-y:auto;position:relative;display:flex;flex-direction:column">
+
+<!-- ENTRY -->
+<sc-if value="{{ s_entry }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:40px 32px;background:#1a1a2e">
+<div style="font-size:13px;color:rgba(255,255,255,.4);letter-spacing:6px;font-weight:500">月老 · 江湖红线</div>
+<div style="font-size:32px;font-weight:900;color:#fff;margin-top:20px;text-align:center;line-height:1.3">暧昧加载<br>请勿退出</div>
+<div style="font-size:12px;color:rgba(255,255,255,.3);margin-top:12px;letter-spacing:2px">Ship or Swipe · 逆水寒 NA/SEA</div>
+<div style="width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.06);margin-top:60px;display:flex;align-items:center;justify-content:center;font-size:30px;color:rgba(255,255,255,.15)">⊠</div>
+<div onClick="{{ goCheck }}" style="margin-top:50px;width:220px;padding:16px;background:#fff;border-radius:14px;color:#1a1a2e;font-size:16px;font-weight:700;text-align:center;cursor:pointer">开始活动</div>
+<div onClick="{{ goMel }}" style="margin-top:18px;font-size:13px;color:rgba(255,255,255,.4);cursor:pointer">先去吃瓜 →</div>
+</div>
+</sc-if>
+
+<!-- CHECK -->
+<sc-if value="{{ s_check }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:40px 32px">
+<div style="font-size:11px;color:#999;letter-spacing:3px">准入校验</div>
+<div style="width:80px;height:80px;border-radius:22px;background:#f0f4f0;margin-top:36px;display:flex;align-items:center;justify-content:center;font-size:34px;color:#bbb">⊠</div>
+<div style="font-size:20px;font-weight:800;color:#222;margin-top:20px">角色等级 Lv.58</div>
+<div style="font-size:14px;color:#2e9e5b;font-weight:600;margin-top:10px">✓ 已达 Lv.50 · 通过</div>
+<div style="font-size:12px;color:#aaa;margin-top:8px">需 Lv.50+ 方可参与</div>
+<div onClick="{{ goProf }}" style="margin-top:44px;width:100%;padding:15px;background:#2a6fdb;border-radius:12px;color:#fff;font-size:15px;font-weight:700;text-align:center;cursor:pointer">进入建档</div>
+<div onClick="{{ goFail }}" style="margin-top:20px;font-size:12px;color:#aaa;cursor:pointer">模拟拦截态 →</div>
+</div>
+</sc-if>
+
+<!-- FAIL -->
+<sc-if value="{{ s_fail }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:40px 32px">
+<div style="font-size:11px;color:#999;letter-spacing:3px">准入校验</div>
+<div style="width:80px;height:80px;border-radius:22px;background:#fbf3f0;border:1px solid #f6cbb6;margin-top:36px;display:flex;align-items:center;justify-content:center;font-size:34px;color:#cdb4ab">⊠</div>
+<div style="font-size:20px;font-weight:800;color:#222;margin-top:20px">角色等级 Lv.42</div>
+<div style="font-size:14px;color:#c2502c;font-weight:600;margin-top:10px">✗ 未达 Lv.50 · 拦截</div>
+<div style="font-size:12px;color:#aaa;margin-top:8px;text-align:center;line-height:1.6">角色等级未达门槛<br>升到 Lv.50 即可建档参与</div>
+<div onClick="{{ goEntry }}" style="margin-top:44px;width:100%;padding:15px;background:#2a6fdb;border-radius:12px;color:#fff;font-size:15px;font-weight:700;text-align:center;cursor:pointer">继续游戏升级 →</div>
+<div onClick="{{ goCheck }}" style="margin-top:20px;font-size:12px;color:#aaa;cursor:pointer">模拟通过态 →</div>
+</div>
+</sc-if>
+
+<!-- PROFILE -->
+<sc-if value="{{ s_prof }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;min-height:100%;padding:0 20px 20px;position:relative">
+<div style="font-size:18px;font-weight:800;color:#222;padding:12px 0 16px;text-align:center">建档</div>
+<div style="font-size:13px;color:#555;font-weight:600;margin-bottom:8px">头像 · 游戏内快照（点选）</div>
+<div style="display:flex;gap:10px;margin-bottom:20px">
+<sc-for list="{{ photoList }}" as="p" hint-placeholder-count="4">
+<div onClick="{{ p.onClick }}" style="{{ p.style }}">{{ p.icon }}</div>
+</sc-for>
+</div>
+<div style="font-size:13px;color:#555;font-weight:600;margin-bottom:8px">交友意向</div>
+<div style="display:flex;border:1px solid #d8d8d8;border-radius:12px;overflow:hidden;margin-bottom:20px;font-size:14px">
+<div onClick="{{ setLove }}" style="flex:1;text-align:center;padding:12px;background:{{ loveBg }};color:{{ loveC }};font-weight:{{ loveFw }};cursor:pointer">恋爱线</div>
+<div onClick="{{ setBud }}" style="flex:1;text-align:center;padding:12px;background:{{ budBg }};color:{{ budC }};font-weight:{{ budFw }};cursor:pointer">搭子线</div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-size:13px;color:#555;font-weight:600">标签（点选 ≤5）</span><span style="font-size:11px;color:#999">{{ tagCount }}/5</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">
+<sc-for list="{{ tagList }}" as="tag" hint-placeholder-count="6">
+<span onClick="{{ tag.onClick }}" style="{{ tag.style }}">{{ tag.name }}</span>
+</sc-for>
+</div>
+<div style="font-size:13px;color:#555;font-weight:600;margin-bottom:8px">暧昧宣言（可输入）</div>
+<input value="{{ decl }}" onChange="{{ onDecl }}" placeholder="写一句…" style="border:1px solid #ddd;border-radius:12px;padding:14px;font-size:13px;color:#333;margin-bottom:8px;width:100%;box-sizing:border-box" />
+<div onClick="{{ openTpl }}" style="font-size:12px;color:#2a6fdb;font-weight:600;cursor:pointer;margin-bottom:20px">套用月老红线模板 →</div>
+<div style="flex:1"></div>
+<div onClick="{{ goReward }}" style="padding:15px;background:#2a6fdb;border-radius:12px;color:#fff;font-size:15px;font-weight:700;text-align:center;cursor:pointer">提交建档</div>
+
+<sc-if value="{{ tplOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:0;right:0;bottom:0;top:0;z-index:50">
+<div onClick="{{ closeTpl }}" style="position:absolute;left:0;right:0;top:0;bottom:0;background:rgba(0,0,0,.35)"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:20px 20px 0 0;padding:20px;box-shadow:0 -6px 24px rgba(0,0,0,.12)">
+<div style="width:36px;height:4px;background:#ddd;border-radius:2px;margin:0 auto 16px"></div>
+<div style="font-size:14px;font-weight:800;color:#222;margin-bottom:14px">套用月老红线模板</div>
+<div onClick="{{ pickTpl1 }}" style="border:1.5px solid #2a6fdb;background:#f3f7fe;border-radius:12px;padding:13px 14px;font-size:13px;color:#2a6fdb;margin-bottom:10px;cursor:pointer">等一个并肩看潮光的人</div>
+<div onClick="{{ pickTpl2 }}" style="border:1px solid #e2e2e2;border-radius:12px;padding:13px 14px;font-size:13px;color:#444;margin-bottom:10px;cursor:pointer">江湖路远，要不要顺路？</div>
+<div onClick="{{ pickTpl3 }}" style="border:1px solid #e2e2e2;border-radius:12px;padding:13px 14px;font-size:13px;color:#444;margin-bottom:10px;cursor:pointer">想找个固定搭子，一起肝日常</div>
+<div onClick="{{ pickTpl4 }}" style="border:1px solid #e2e2e2;border-radius:12px;padding:13px 14px;font-size:13px;color:#444;cursor:pointer">在线蹲一个一起看烟花的</div>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<!-- REWARD -->
+<sc-if value="{{ s_reward }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:40px 32px">
+<div style="font-size:11px;color:#999;letter-spacing:3px">月老 · 江湖红线</div>
+<div style="font-size:24px;font-weight:900;color:#222;margin-top:16px">建档完成！</div>
+<div style="width:80px;height:80px;border-radius:22px;background:#f3f7fe;border:1px solid #c5d8f5;margin-top:36px;display:flex;align-items:center;justify-content:center;font-size:34px;color:#2a6fdb">⊠</div>
+<div style="font-size:15px;font-weight:700;color:#333;margin-top:20px">首次奖励已就绪</div>
+<div style="font-size:12px;color:#999;margin-top:6px">奖励内容待策划确认</div>
+<div onClick="{{ goDanmu }}" style="margin-top:44px;width:100%;padding:15px;background:#2a6fdb;border-radius:12px;color:#fff;font-size:15px;font-weight:700;text-align:center;cursor:pointer">领取奖励 · 进入弹幕墙</div>
+</div>
+</sc-if>
+
+<!-- DANMU -->
+<sc-if value="{{ s_danmu }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;min-height:100%;padding:0 0 20px">
+<div style="display:flex;align-items:center;justify-content:center;padding:10px 20px;position:relative"><div style="font-size:16px;font-weight:800;color:#222">暧昧上墙</div><div style="position:absolute;right:20px;font-size:11px;color:#e0571f;background:#fdeee7;border:1px solid #f6cbb6;border-radius:10px;padding:3px 10px">实时弹幕</div></div>
+<div data-wall="1" style="position:relative;overflow:hidden;margin:6px 16px 0;border:1px solid #e8e8e8;border-radius:14px;background:#f6f7f9;height:172px">
+<sc-for list="{{ flyers }}" as="f" hint-placeholder-count="0">
+<div data-key="{{ f.key }}" style="{{ f.style }}"><span style="color:#ccc">⊠</span><span>{{ f.text }}</span><span style="color:#e0571f;font-weight:700">♥ {{ f.likes }}</span></div>
+</sc-for>
+</div>
+<div style="margin:12px 20px 0;background:#f3f7fe;border:1px solid #c5d8f5;border-radius:12px;padding:12px 14px">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:12px;color:#2a6fdb;font-weight:700">每日任务 · 点 ♥ 5 条宣言</span><span style="font-size:11px;color:#999">{{ likeTxt }}</span></div>
+<div style="height:5px;background:#dce9f9;border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ likePct }};background:#2a6fdb;border-radius:3px;transition:width .3s"></div></div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin:16px 20px 8px"><span style="font-size:12px;color:#555;font-weight:600">点一条送上墙 ↓</span><span style="font-size:10.5px;color:#999">数字为累计点赞</span></div>
+<div style="display:flex;flex-direction:column;gap:8px;padding:0 16px">
+<sc-for list="{{ optionList }}" as="o" hint-placeholder-count="5">
+<div onClick="{{ o.onClick }}" style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e2e2e2;border-radius:14px;padding:10px 12px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.04)"><span style="font-size:14px;color:#ccc">⊠</span><span style="font-size:12.5px;color:#444;flex:1">{{ o.text }}</span><span style="font-size:12px;color:#e0571f;font-weight:700">♥ {{ o.likes }}</span></div>
+</sc-for>
+</div>
+<div onClick="{{ goMsg }}" style="margin:14px 20px 0;font-size:12px;color:#2a6fdb;font-weight:600;cursor:pointer;text-align:center">查看被点消息 →</div>
+<div style="flex:1"></div>
+<div onClick="{{ goSwipe }}" style="margin:16px 20px 0;padding:15px;background:#2a6fdb;border-radius:12px;color:#fff;font-size:15px;font-weight:700;text-align:center;cursor:pointer">模拟 D4 到了 · 开始匹配</div>
+</div>
+</sc-if>
+
+<!-- MSG -->
+<sc-if value="{{ s_msg }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;min-height:100%;padding:0 20px 20px">
+<div style="font-size:16px;font-weight:800;color:#222;padding:12px 0 16px;text-align:center">消息</div>
+<div style="border:1.5px solid #c5d8f5;border-radius:14px;background:#f3f7fe;padding:14px;display:flex;gap:12px;align-items:flex-start;margin-bottom:10px">
+<div style="width:42px;height:42px;border-radius:50%;background:#dce8fb;display:flex;align-items:center;justify-content:center;font-size:18px;color:#2a6fdb;flex-shrink:0">♥</div>
+<div><div style="font-size:13px;font-weight:700;color:#222">沈墨白 对你的宣言心动了</div><div style="font-size:11.5px;color:#777;margin-top:3px">"等一个并肩看潮光的人"</div><div style="font-size:10.5px;color:#bbb;margin-top:4px">2分钟前</div></div>
+</div>
+<div style="border:1px solid #f0f0f0;border-radius:14px;background:#fafafa;padding:14px;display:flex;gap:12px;align-items:flex-start;margin-bottom:10px">
+<div style="width:42px;height:42px;border-radius:50%;background:#f1f1f1;display:flex;align-items:center;justify-content:center;font-size:18px;color:#ccc;flex-shrink:0">♥</div>
+<div><div style="font-size:13px;font-weight:700;color:#555">林晚 对你的宣言心动了</div><div style="font-size:11.5px;color:#aaa;margin-top:3px">"江湖路远，要不要顺路？"</div><div style="font-size:10.5px;color:#ccc;margin-top:4px">1小时前</div></div>
+</div>
+<div style="border:1px solid #f0f0f0;border-radius:14px;background:#fafafa;padding:14px;display:flex;gap:12px;align-items:flex-start">
+<div style="width:42px;height:42px;border-radius:50%;background:#f1f1f1;display:flex;align-items:center;justify-content:center;font-size:18px;color:#ccc;flex-shrink:0">♥</div>
+<div><div style="font-size:13px;font-weight:700;color:#555">江照月 对你的宣言心动了</div><div style="font-size:11.5px;color:#aaa;margin-top:3px">"夜里的剑气，配你的灯"</div><div style="font-size:10.5px;color:#ccc;margin-top:4px">3小时前</div></div>
+</div>
+<div style="flex:1"></div>
+<div onClick="{{ goSwipe }}" style="margin-top:20px;padding:15px;background:#2a6fdb;border-radius:12px;color:#fff;font-size:15px;font-weight:700;text-align:center;cursor:pointer">开始匹配</div>
+</div>
+</sc-if>
+
+<!-- SWIPE -->
+<sc-if value="{{ s_swipe }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;min-height:100%;padding:0 16px 16px">
+<div style="display:flex;align-items:center;justify-content:center;padding:10px 4px 12px;position:relative"><div style="font-size:16px;font-weight:800;color:#222">Ship or Swipe</div><div style="position:absolute;right:4px;font-size:12px;color:#999">剩余 <b style="color:#2a6fdb">{{ swLeft }}</b> 次</div></div>
+<div ref="{{ cardRef }}" onPointerDown="{{ onCardDown }}" onPointerMove="{{ onCardMove }}" onPointerUp="{{ onCardUp }}" onPointerCancel="{{ onCardUp }}" style="border:1px solid #e2e2e2;border-radius:20px;overflow:hidden;flex:1;display:flex;flex-direction:column;background:#fafafa;touch-action:none;position:relative;cursor:grab;min-height:360px">
+<div data-lbl="ship" style="position:absolute;top:26px;left:22px;z-index:6;border:3px solid #2e9e5b;color:#2e9e5b;font-size:24px;font-weight:900;padding:3px 12px;border-radius:8px;transform:rotate(-16deg);opacity:0;pointer-events:none">SHIP</div>
+<div data-lbl="skip" style="position:absolute;top:26px;right:22px;z-index:6;border:3px solid #c2502c;color:#c2502c;font-size:24px;font-weight:900;padding:3px 12px;border-radius:8px;transform:rotate(16deg);opacity:0;pointer-events:none">SKIP</div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;font-size:56px;color:#ddd;min-height:220px;pointer-events:none">⊠</div>
+<div style="padding:16px 18px 18px;background:#fff;border-top:1px solid #f0f0f0;pointer-events:none">
+<div style="font-size:19px;font-weight:800;color:#222">{{ cName }} · {{ cCls }}</div>
+<div style="display:flex;gap:8px;margin:10px 0">
+<span style="border:1px solid #d8d8d8;color:#555;border-radius:12px;padding:5px 12px;font-size:11.5px">{{ cT1 }}</span>
+<span style="border:1px solid #d8d8d8;color:#555;border-radius:12px;padding:5px 12px;font-size:11.5px">{{ cT2 }}</span>
+</div>
+<div style="font-size:13px;color:#666;font-style:italic">"{{ cD }}"</div>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:24px;padding:16px 0 4px">
+<div onClick="{{ btnSkip }}" style="width:58px;height:58px;border-radius:50%;border:1.5px solid #d8d8d8;color:#999;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer">✕</div>
+<div onClick="{{ goSin }}" style="width:48px;height:48px;border-radius:50%;border:1.5px solid #2a6fdb;color:#2a6fdb;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer">★</div>
+<div onClick="{{ btnShip }}" style="width:58px;height:58px;border-radius:50%;border:2px solid #2a6fdb;background:#f3f7fe;color:#2a6fdb;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer">♥</div>
+</div>
+<div style="text-align:center;font-size:10.5px;color:#aaa;padding:2px 0 0">← 拖动卡片左右滑动 · 连续 Ship 3 次触发双向 →</div>
+<div style="display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap">
+<div onClick="{{ goMut }}" style="font-size:10.5px;color:#2a6fdb;cursor:pointer;padding:3px 8px;border:1px solid #c5d8f5;border-radius:8px">模拟双向</div>
+<div onClick="{{ goSin }}" style="font-size:10.5px;color:#2a6fdb;cursor:pointer;padding:3px 8px;border:1px solid #c5d8f5;border-radius:8px">模拟单向</div>
+<div onClick="{{ goGuar }}" style="font-size:10.5px;color:#2a6fdb;cursor:pointer;padding:3px 8px;border:1px solid #c5d8f5;border-radius:8px">模拟月老</div>
+<div onClick="{{ goPure }}" style="font-size:10.5px;color:#2a6fdb;cursor:pointer;padding:3px 8px;border:1px solid #c5d8f5;border-radius:8px">模拟纯参与</div>
+</div>
+</div>
+</sc-if>
+
+<!-- MUTUAL -->
+<sc-if value="{{ s_mut }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:40px 28px">
+<div style="font-size:11px;font-weight:700;color:#e0571f;background:#fdeee7;border:1px solid #f6cbb6;border-radius:10px;padding:4px 12px">双向 Ship · 红线自牵成</div>
+<div style="font-size:24px;font-weight:900;color:#222;margin-top:20px">红线牵成！</div>
+<div style="font-size:13px;color:#666;margin-top:8px">你和「沈墨白」互相心动</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;margin:30px 0">
+<div style="width:64px;height:64px;border-radius:50%;background:#f1ede9;display:flex;align-items:center;justify-content:center;font-size:24px;color:#bbb">⊠</div>
+<div style="color:#cc5a3a;font-size:18px;letter-spacing:2px">·····</div>
+<div style="width:50px;height:50px;border-radius:50%;background:#fdeee7;border:1px solid #f6cbb6;display:flex;align-items:center;justify-content:center;font-size:20px;color:#e0571f">♥</div>
+<div style="color:#cc5a3a;font-size:18px;letter-spacing:2px">·····</div>
+<div style="width:64px;height:64px;border-radius:50%;background:#f1ede9;display:flex;align-items:center;justify-content:center;font-size:24px;color:#bbb">⊠</div>
+</div>
+<div onClick="{{ goCont }}" style="width:100%;padding:14px;border:1.5px solid #2a6fdb;border-radius:12px;color:#2a6fdb;font-size:14px;font-weight:700;text-align:center;cursor:pointer">⊠ 私聊</div>
+<div onClick="{{ goCont }}" style="width:100%;padding:13px;border:1px solid #d8d8d8;border-radius:12px;color:#555;font-size:13px;font-weight:600;text-align:center;margin-top:10px;cursor:pointer">游戏内加好友</div>
+<div onClick="{{ goCont }}" style="width:100%;padding:14px;background:#2a6fdb;border-radius:12px;color:#fff;font-size:14px;font-weight:700;text-align:center;margin-top:10px;cursor:pointer">组队进契约副本</div>
+<div style="font-size:10.5px;color:#999;margin-top:14px">⊠ 私聊仅双向后开启（反骚扰）</div>
+</div>
+</sc-if>
+
+<!-- SINGLE -->
+<sc-if value="{{ s_sin }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:40px 28px">
+<div style="font-size:11px;font-weight:700;color:#2a6fdb;background:#e9f0fc;border:1px solid #c5d8f5;border-radius:10px;padding:4px 12px">单向心动</div>
+<div style="font-size:22px;font-weight:900;color:#222;margin-top:20px">你已心动「沈墨白」</div>
+<div style="font-size:13px;color:#666;margin-top:10px;text-align:center;line-height:1.7">已进入对方「心动池」<br>等待对方回 Ship 即可牵成</div>
+<div style="margin:28px 0;border:1px solid #e2e2e2;border-radius:14px;background:#fafafa;padding:16px;display:flex;align-items:center;gap:14px;width:100%">
+<div style="width:48px;height:48px;border-radius:50%;background:#fdeee7;border:1px solid #f6cbb6;display:flex;align-items:center;justify-content:center;font-size:20px;color:#e0571f;flex-shrink:0">♥</div>
+<div><div style="font-size:14px;font-weight:700;color:#333">我心动的人 +1</div><div style="font-size:11px;color:#999;margin-top:3px">可在心动报告查看</div></div>
+</div>
+<div onClick="{{ goSwipe }}" style="width:100%;padding:14px;background:#2a6fdb;border-radius:12px;color:#fff;font-size:15px;font-weight:700;text-align:center;cursor:pointer">继续滑卡</div>
+<div style="font-size:10.5px;color:#999;margin-top:14px">对方可在「被心动列表」看到并回 Ship</div>
+</div>
+</sc-if>
+
+<!-- GUARANTEE -->
+<sc-if value="{{ s_guar }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:40px 28px">
+<div style="font-size:11px;font-weight:700;color:#7a5a1a;background:#fbf1d8;border:1px solid #ecd9a0;border-radius:10px;padding:4px 12px">月老保底</div>
+<div style="width:68px;height:68px;border-radius:50%;background:#fbf1d8;border:1px solid #ecd9a0;margin-top:24px;display:flex;align-items:center;justify-content:center;font-size:26px;color:#b8923a">⊠</div>
+<div style="font-size:10.5px;color:#999;margin-top:8px">NPC 月老 · 乱点鸳鸯</div>
+<div style="font-size:22px;font-weight:900;color:#222;margin-top:16px">月老牵了一条线</div>
+<div style="font-size:13px;color:#666;margin-top:10px;text-align:center;line-height:1.7">你和「林晚」被月老撮合<br>（按标签 / 活跃时段加权）</div>
+<div onClick="{{ goCont }}" style="margin-top:36px;width:100%;padding:14px;background:#2a6fdb;border-radius:12px;color:#fff;font-size:15px;font-weight:700;text-align:center;cursor:pointer">组队进契约副本</div>
+<div style="font-size:10.5px;color:#999;margin-top:14px">奖励低于自牵成线</div>
+</div>
+</sc-if>
+
+<!-- PURE -->
+<sc-if value="{{ s_pure }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:40px 28px">
+<div style="font-size:11px;font-weight:700;color:#666;background:#f1f1f1;border:1px solid #ddd;border-radius:10px;padding:4px 12px">纯参与</div>
+<div style="width:68px;height:68px;border-radius:16px;background:#fafafa;border:1px solid #e2e2e2;margin-top:28px;display:flex;align-items:center;justify-content:center;font-size:28px;color:#ccc">⊠</div>
+<div style="font-size:22px;font-weight:900;color:#222;margin-top:20px">今日配额已完成</div>
+<div style="font-size:13px;color:#666;margin-top:10px;text-align:center;line-height:1.7">基础奖励已到账<br>看看谁对你心动过</div>
+<div style="margin:24px 0;border:1px solid #e2e2e2;border-radius:12px;background:#fafafa;padding:14px;text-align:center;font-size:13px;color:#777;width:100%">基础奖励 · 道具 ×N（待策划确认）</div>
+<div onClick="{{ goRpt }}" style="width:100%;padding:14px;background:#2a6fdb;border-radius:12px;color:#fff;font-size:15px;font-weight:700;text-align:center;cursor:pointer">查看心动报告</div>
+</div>
+</sc-if>
+
+<!-- CONTRACT -->
+<sc-if value="{{ s_cont }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;min-height:100%;padding:0 20px 20px">
+<div style="font-size:16px;font-weight:800;color:#222;padding:12px 0 14px;text-align:center">契约副本</div>
+<div style="border:1px solid #e2e2e2;border-radius:16px;background:#fafafa;height:180px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#ddd">⊠</div>
+<div style="font-size:18px;font-weight:800;color:#222;text-align:center;margin-top:16px">与「沈墨白」的契约</div>
+<div style="margin:10px 0 0;font-size:11px;color:#777;background:#f4f4f4;border-radius:10px;padding:10px 14px;text-align:center">自牵成 / 保底线 / 临时组队 / 搭子线 均可进 · 主打互动非战力</div>
+<div style="font-size:13px;color:#555;font-weight:600;margin:20px 0 10px">通关奖励</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px">
+<div style="text-align:center"><div style="height:52px;border:1px solid #e2e2e2;border-radius:12px;background:#fafafa;display:flex;align-items:center;justify-content:center;font-size:20px;color:#ccc">⊠</div><div style="font-size:10px;color:#888;margin-top:5px">合影框</div></div>
+<div style="text-align:center"><div style="height:52px;border:1px solid #e2e2e2;border-radius:12px;background:#fafafa;display:flex;align-items:center;justify-content:center;font-size:20px;color:#ccc">⊠</div><div style="font-size:10px;color:#888;margin-top:5px">双人坐骑</div></div>
+<div style="text-align:center"><div style="height:52px;border:1px solid #e2e2e2;border-radius:12px;background:#fafafa;display:flex;align-items:center;justify-content:center;font-size:20px;color:#ccc">⊠</div><div style="font-size:10px;color:#888;margin-top:5px">情侣外观</div></div>
+<div style="text-align:center"><div style="height:52px;border:1px solid #e2e2e2;border-radius:12px;background:#fafafa;display:flex;align-items:center;justify-content:center;font-size:20px;color:#ccc">⊠</div><div style="font-size:10px;color:#888;margin-top:5px">信物升阶</div></div>
+</div>
+<div style="flex:1"></div>
+<div onClick="{{ goRpt }}" style="margin-top:20px;padding:15px;background:#2a6fdb;border-radius:12px;color:#fff;font-size:15px;font-weight:700;text-align:center;cursor:pointer">一键组队进副本</div>
+<div onClick="{{ goRpt }}" style="margin-top:10px;font-size:12px;color:#2a6fdb;font-weight:600;cursor:pointer;text-align:center">查看心动报告 →</div>
+</div>
+</sc-if>
+
+<!-- REPORT -->
+<sc-if value="{{ s_rpt }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;min-height:100%;padding:0 20px 20px">
+<div style="font-size:16px;font-weight:800;color:#222;padding:12px 0 14px;text-align:center">心动报告</div>
+<div style="display:flex;gap:10px;margin-bottom:16px">
+<div style="flex:1;border:1px solid #e2e2e2;border-radius:14px;background:#fafafa;padding:16px;text-align:center"><div style="font-size:28px;font-weight:800;color:#2a6fdb">24</div><div style="font-size:11px;color:#777;margin-top:5px">人右滑了你</div></div>
+<div style="flex:1;border:1px solid #f6cbb6;border-radius:14px;background:#fdf6f2;padding:16px;text-align:center"><div style="font-size:28px;font-weight:800;color:#e0571f">2</div><div style="font-size:11px;color:#777;margin-top:5px">条红线命中</div></div>
+</div>
+<div style="font-size:13px;color:#555;font-weight:600;margin-bottom:10px">江湖人缘画像</div>
+<div style="border:1px solid #e2e2e2;border-radius:14px;background:#fafafa;padding:16px;display:flex;align-items:center;gap:14px;margin-bottom:16px"><div style="width:52px;height:52px;border-radius:12px;background:#fff;border:1px solid #e2e2e2;display:flex;align-items:center;justify-content:center;font-size:22px;color:#ccc">⊠</div><div><div style="font-size:14px;font-weight:700;color:#333">「人间理想型」</div><div style="font-size:11px;color:#999;margin-top:3px">夜猫子 · CP向 · 高人缘</div></div></div>
+<div style="font-size:13px;color:#555;font-weight:600;margin-bottom:10px">错过的人</div>
+<div style="display:flex;gap:10px;margin-bottom:16px">
+<div style="width:48px;height:48px;border-radius:50%;background:#f1f1f1;display:flex;align-items:center;justify-content:center;font-size:18px;color:#ccc">⊠</div>
+<div style="width:48px;height:48px;border-radius:50%;background:#f1f1f1;display:flex;align-items:center;justify-content:center;font-size:18px;color:#ccc">⊠</div>
+<div style="width:48px;height:48px;border-radius:50%;background:#f1f1f1;display:flex;align-items:center;justify-content:center;font-size:18px;color:#ccc">⊠</div>
+<div style="width:48px;height:48px;border-radius:50%;background:#f1f1f1;display:flex;align-items:center;justify-content:center;font-size:12px;color:#999">+5</div>
+</div>
+<div style="flex:1"></div>
+<div onClick="{{ goEntry }}" style="padding:15px;background:#2a6fdb;border-radius:12px;color:#fff;font-size:15px;font-weight:700;text-align:center;cursor:pointer">生成总结卡 · 分享领奖励</div>
+<div style="text-align:center;font-size:10.5px;color:#999;margin-top:8px">分享好友可各得奖励 · 奖励内容待策划确认</div>
+<div onClick="{{ goMel }}" style="margin-top:12px;font-size:12px;color:#2a6fdb;font-weight:600;cursor:pointer;text-align:center">去吃瓜 →</div>
+</div>
+</sc-if>
+
+<!-- MELON -->
+<sc-if value="{{ s_mel }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;min-height:100%;padding:0 20px 20px">
+<div style="font-size:16px;font-weight:800;color:#222;padding:12px 0 14px;text-align:center">吃瓜现场</div>
+<div style="display:flex;border:1px solid #d8d8d8;border-radius:10px;overflow:hidden;font-size:13px;margin-bottom:14px">
+<div style="flex:1;text-align:center;padding:10px;background:#e9f0fc;color:#2a6fdb;font-weight:700">今日红线榜</div>
+<div style="flex:1;text-align:center;padding:10px;color:#666">名场面</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+<div style="display:flex;align-items:center;gap:10px;border:1px solid #e2e2e2;border-radius:12px;padding:10px 14px"><span style="font-size:15px;font-weight:800;color:#e0571f">1</span><span style="font-size:16px;color:#ccc">⊠</span><span style="font-size:13px;color:#333;flex:1">沈墨白 <span style="color:#cc5a3a">×</span> 林晚</span><span style="font-size:11px;color:#999">磕 1.2k</span></div>
+<div style="display:flex;align-items:center;gap:10px;border:1px solid #e2e2e2;border-radius:12px;padding:10px 14px"><span style="font-size:15px;font-weight:800;color:#e0571f">2</span><span style="font-size:16px;color:#ccc">⊠</span><span style="font-size:13px;color:#333;flex:1">江照月 <span style="color:#cc5a3a">×</span> 顾长风</span><span style="font-size:11px;color:#999">磕 880</span></div>
+<div style="display:flex;align-items:center;gap:10px;border:1px solid #e2e2e2;border-radius:12px;padding:10px 14px"><span style="font-size:15px;font-weight:800;color:#999">3</span><span style="font-size:16px;color:#ccc">⊠</span><span style="font-size:13px;color:#333;flex:1">苏暮 <span style="color:#cc5a3a">×</span> 白霜</span><span style="font-size:11px;color:#999">磕 640</span></div>
+</div>
+<div style="font-size:13px;color:#555;font-weight:600;margin-bottom:10px">匿名磕 CP · 投票</div>
+<div style="border:1px solid #e2e2e2;border-radius:14px;background:#fafafa;padding:18px">
+<div style="display:flex;align-items:center;justify-content:center;gap:12px"><div style="width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid #e2e2e2;display:flex;align-items:center;justify-content:center;font-size:18px;color:#ccc">⊠</div><span style="font-size:18px;color:#cc5a3a">♥</span><div style="width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid #e2e2e2;display:flex;align-items:center;justify-content:center;font-size:18px;color:#ccc">⊠</div></div>
+<div style="display:flex;gap:10px;margin-top:14px"><div onClick="{{ doKe }}" style="flex:1;border:1.5px solid #2a6fdb;border-radius:12px;color:#2a6fdb;text-align:center;padding:10px;font-size:13px;font-weight:700;cursor:pointer">磕！{{ keTxt }}</div><div style="flex:1;border:1px solid #d8d8d8;border-radius:12px;color:#888;text-align:center;padding:10px;font-size:13px;cursor:pointer">下一对</div></div>
+</div>
+<div style="flex:1"></div>
+<div onClick="{{ goEntry }}" style="margin-top:20px;padding:15px;border:1.5px solid #2a6fdb;border-radius:12px;color:#2a6fdb;font-size:15px;font-weight:700;text-align:center;cursor:pointer">返回首页</div>
+</div>
+</sc-if>
+
+</div>
+
+<div style="height:34px;background:#fff;flex-shrink:0"></div>
+
+<div onClick="{{ togMenu }}" style="position:absolute;top:54px;right:10px;width:34px;height:34px;border-radius:10px;background:rgba(0,0,0,.05);display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;z-index:120">☰</div>
+
+<sc-if value="{{ menu }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:0;left:0;right:0;bottom:0;z-index:200">
+<div onClick="{{ togMenu }}" style="position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4)"></div>
+<div style="position:absolute;top:54px;right:0;width:200px;background:#fff;border-radius:0 0 0 18px;box-shadow:-4px 4px 24px rgba(0,0,0,.15);padding:16px 14px;max-height:700px;overflow-y:auto">
+<div style="font-size:11px;font-weight:700;color:#999;letter-spacing:1px;margin-bottom:12px">场景导航</div>
+<div onClick="{{ goEntry }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#333;cursor:pointer">封面</div>
+<div onClick="{{ goCheck }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#333;cursor:pointer">准入 · 通过</div>
+<div onClick="{{ goFail }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#333;cursor:pointer">准入 · 拦截</div>
+<div onClick="{{ goProf }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#333;cursor:pointer">建档</div>
+<div onClick="{{ goReward }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#333;cursor:pointer">建档完成 · 领奖</div>
+<div onClick="{{ goDanmu }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#333;cursor:pointer">弹幕墙</div>
+<div onClick="{{ goMsg }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#333;cursor:pointer">被点消息</div>
+<div onClick="{{ goSwipe }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#333;cursor:pointer">Ship or Swipe</div>
+<div onClick="{{ goMut }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#e0571f;cursor:pointer">① 双向自牵成</div>
+<div onClick="{{ goSin }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#333;cursor:pointer">② 单向 Ship</div>
+<div onClick="{{ goGuar }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#333;cursor:pointer">③ 月老保底</div>
+<div onClick="{{ goPure }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#333;cursor:pointer">④ 纯参与</div>
+<div onClick="{{ goCont }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#333;cursor:pointer">契约副本</div>
+<div onClick="{{ goRpt }}" style="padding:9px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#333;cursor:pointer">心动报告</div>
+<div onClick="{{ goMel }}" style="padding:9px 0;font-size:13px;color:#333;cursor:pointer">吃瓜磕 CP</div>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:393,&quot;height&quot;:852}}">
+class Component extends DCLogic {
+  state = {
+    screen:'entry', history:[], intent:'love', tplOpen:false, menu:false,
+    selTags:['夜猫子','CP向','同玩法'], decl:'', photo:0,
+    options:[
+      {id:1,text:'等一个并肩看潮光的人',likes:128},
+      {id:2,text:'只想找个固定搭子',likes:86},
+      {id:3,text:'夜里的剑气，配你的灯',likes:204},
+      {id:4,text:'江湖路远，要不要顺路？',likes:53},
+      {id:5,text:'在线蹲一个一起钓鱼的',likes:97}
+    ],
+    flyers:[], taskN:0, swipes:0, ci:0, ke:0,
+    optPool:['谁来陪我看一次潮汐','同门派的，组个固定队呀','求一个一起跨年的','灯会那天，要一起吗','蹲一个语音搭子','想和你看遍江湖','缺个一起摸鱼的','作息党求同好'],
+    optPtr:0, optNextId:100
+  };
+  ambient = [
+    {text:'等一个并肩看潮光的人',likes:128},
+    {text:'作息党求同好，一起肝日常',likes:64},
+    {text:'谁来陪我看一次潮汐',likes:41},
+    {text:'同门派的，组个固定队呀',likes:72},
+    {text:'求一个一起跨年的',likes:88},
+    {text:'夜里的剑气，配你的灯',likes:204},
+    {text:'蹲一个语音搭子',likes:33},
+    {text:'想和你看遍江湖',likes:150}
+  ];
+  allTags = ['夜猫子','CP向','同玩法','找固定队','语音队','钓鱼搭子','看剧搭子','手残党'];
+  cards = [
+    {n:'沈墨白',c:'铁衣',t1:'夜猫子',t2:'CP向',d:'在线蹲一个一起看烟花的'},
+    {n:'林晚',c:'素问',t1:'同玩法',t2:'作息党',d:'江湖路远，要不要顺路？'},
+    {n:'江照月',c:'神相',t1:'找固定队',t2:'语音队',d:'求一个陪我钓鱼的人'}
+  ];
+  _fkey = 0; _lane = 0; _amb = 0; _pos = {}; _spd = {}; _prevScreen = 'entry';
+
+  wallRef = (el) => { this._wallEl = el; };
+  componentDidMount() {
+    this._spawnTimer = setInterval(() => {
+      if (this.state.screen !== 'danmu') return;
+      const it = this.ambient[(this._amb++) % this.ambient.length];
+      this.addFlyer(it.text, it.likes, false);
+    }, 1600);
+    this._moveTimer = setInterval(() => {
+      if (this.state.screen !== 'danmu') return;
+      const wall = document.querySelector('[data-wall="1"]');
+      if (!wall) return;
+      const gone = [];
+      for (const node of Array.from(wall.children)) {
+        const k = node.getAttribute('data-key');
+        let x = this._pos[k]; if (x == null) { x = 380; this._pos[k] = x; }
+        x -= (this._spd[k] || 1.2) * 2.5; this._pos[k] = x;
+        node.style.transform = 'translateX(' + x + 'px)';
+        if (x < -((node.offsetWidth || 160) + 40)) gone.push(Number(k));
+      }
+      if (gone.length) this.setState(st => ({ flyers: st.flyers.filter(f => !gone.includes(f.key)) }));
+    }, 32);
+  }
+  componentWillUnmount() { clearInterval(this._spawnTimer); clearInterval(this._moveTimer); }
+  componentDidUpdate() {
+    const cur = this.state.screen;
+    if (this._prevScreen !== 'danmu' && cur === 'danmu') {
+      for (let i=0;i<5;i++){ const a=this.ambient[i]; this.addFlyer(a.text, a.likes, false, 300*0.2*i + 30); }
+    } else if (this._prevScreen === 'danmu' && cur !== 'danmu' && this.state.flyers.length) {
+      this._pos = {}; this.setState({flyers:[]});
+    }
+    this._prevScreen = cur;
+  }
+  addFlyer = (text, likes, hot, startX) => {
+    this._lane = (this._lane + 1) % 4;
+    const key = ++this._fkey;
+    this._pos[key] = (startX != null) ? startX : 380;
+    this._spd[key] = 0.9 + Math.random()*0.7;
+    this.setState(st => ({ flyers: [...st.flyers.slice(-15), { key, text, likes, hot, top: 10 + this._lane*39 }] }));
+  };
+  likeOption = (id) => {
+    const o = this.state.options.find(x=>x.id===id);
+    if (o) this.addFlyer(o.text, o.likes+1, true, 380);
+    this.setState(st => {
+      const text = st.optPool[st.optPtr % st.optPool.length];
+      const fresh = { id: st.optNextId, text, likes: 20 + Math.floor(Math.random()*180) };
+      return {
+        options: st.options.map(x => x.id===id ? fresh : x),
+        optPtr: st.optPtr + 1,
+        optNextId: st.optNextId + 1,
+        taskN: st.taskN + 1
+      };
+    });
+  };
+
+  nav = (s) => () => this.setState(st => ({screen:s, history:[...st.history, st.screen], menu:false, tplOpen:false}));
+  back = () => this.setState(st => {
+    if (!st.history.length) return {menu:false};
+    const h = [...st.history]; const p = h.pop();
+    return {screen:p, history:h, menu:false, tplOpen:false};
+  });
+  toggleTag = (t) => this.setState(st => {
+    if (st.selTags.includes(t)) return {selTags: st.selTags.filter(x=>x!==t)};
+    if (st.selTags.length >= 5) return {};
+    return {selTags:[...st.selTags, t]};
+  });
+
+  cardRef = (el) => { this.cardEl = el; };
+  _resetCard = () => {
+    if (!this.cardEl) return;
+    this.cardEl.style.transition = 'none';
+    this.cardEl.style.transform = 'translateX(0) rotate(0deg)';
+    const s = this.cardEl.querySelector('[data-lbl="ship"]');
+    const k = this.cardEl.querySelector('[data-lbl="skip"]');
+    if (s) s.style.opacity = 0;
+    if (k) k.style.opacity = 0;
+  };
+  onCardDown = (e) => {
+    const el = e.currentTarget;
+    this._drag = {x0:e.clientX, dx:0, el};
+    try { el.setPointerCapture(e.pointerId); } catch(_){}
+    el.style.transition = 'none';
+  };
+  onCardMove = (e) => {
+    if (!this._drag) return;
+    const dx = e.clientX - this._drag.x0;
+    this._drag.dx = dx;
+    this._drag.el.style.transform = 'translateX('+dx+'px) rotate('+(dx/18)+'deg)';
+    const s = this._drag.el.querySelector('[data-lbl="ship"]');
+    const k = this._drag.el.querySelector('[data-lbl="skip"]');
+    if (s) s.style.opacity = dx>0 ? Math.min(dx/100,1) : 0;
+    if (k) k.style.opacity = dx<0 ? Math.min(-dx/100,1) : 0;
+  };
+  onCardUp = (e) => {
+    if (!this._drag) return;
+    const dx = this._drag.dx; const el = this._drag.el;
+    this._drag = null;
+    el.style.transition = 'transform .35s ease';
+    if (dx > 95) { el.style.transform = 'translateX(520px) rotate(26deg)'; setTimeout(()=>this.finishSwipe(true), 230); }
+    else if (dx < -95) { el.style.transform = 'translateX(-520px) rotate(-26deg)'; setTimeout(()=>this.finishSwipe(false), 230); }
+    else { el.style.transform = 'translateX(0) rotate(0deg)'; const s=el.querySelector('[data-lbl="ship"]'),k=el.querySelector('[data-lbl="skip"]'); if(s)s.style.opacity=0; if(k)k.style.opacity=0; }
+  };
+  btnShip = () => { if(!this.cardEl) return; this.cardEl.style.transition='transform .35s ease'; this.cardEl.style.transform='translateX(520px) rotate(26deg)'; setTimeout(()=>this.finishSwipe(true),230); };
+  btnSkip = () => { if(!this.cardEl) return; this.cardEl.style.transition='transform .35s ease'; this.cardEl.style.transform='translateX(-520px) rotate(-26deg)'; setTimeout(()=>this.finishSwipe(false),230); };
+  finishSwipe = (isShip) => {
+    if (isShip) {
+      const n = this.state.swipes + 1;
+      if (n >= 3) { this.setState(st => ({screen:'mut', history:[...st.history, 'swipe'], swipes:0, ci:0})); return; }
+      this.setState({swipes:n, ci:this.state.ci+1}, this._resetCard);
+    } else {
+      this.setState({ci:this.state.ci+1}, this._resetCard);
+    }
+  };
+
+  renderVals() {
+    const st = this.state;
+    const {screen, intent, tplOpen, menu, decl, swipes, ci, photo} = st;
+    const cd = this.cards[ci % this.cards.length];
+    const tagSel = 'border:1px solid #2a6fdb;color:#2a6fdb;background:#f3f7fe;border-radius:14px;padding:7px 14px;font-size:12px;cursor:pointer';
+    const tagUn = 'border:1px solid #ddd;color:#555;background:#fff;border-radius:14px;padding:7px 14px;font-size:12px;cursor:pointer';
+    const phSel = 'width:68px;height:68px;border-radius:14px;border:2px solid #2a6fdb;background:#f3f7fe;display:flex;align-items:center;justify-content:center;font-size:24px;color:#2a6fdb;cursor:pointer';
+    const phUn = 'width:68px;height:68px;border-radius:14px;border:1px solid #ddd;background:#fafafa;display:flex;align-items:center;justify-content:center;font-size:24px;color:#ccc;cursor:pointer';
+    const flyBase = 'position:absolute;left:0;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;border-radius:14px;padding:6px 11px;font-size:12px;box-shadow:0 1px 4px rgba(0,0,0,.07);will-change:transform;';
+    return {
+      s_entry:screen==='entry', s_check:screen==='check', s_fail:screen==='fail',
+      s_prof:screen==='prof', s_reward:screen==='reward', s_danmu:screen==='danmu',
+      s_msg:screen==='msg', s_swipe:screen==='swipe',
+      s_mut:screen==='mut', s_sin:screen==='sin', s_guar:screen==='guar', s_pure:screen==='pure',
+      s_cont:screen==='cont', s_rpt:screen==='rpt', s_mel:screen==='mel',
+      showBack: screen!=='entry', tplOpen, menu, decl,
+      loveBg:intent==='love'?'#e9f0fc':'transparent', loveC:intent==='love'?'#2a6fdb':'#666', loveFw:intent==='love'?'700':'400',
+      budBg:intent==='buddy'?'#e9f0fc':'transparent', budC:intent==='buddy'?'#2a6fdb':'#666', budFw:intent==='buddy'?'700':'400',
+      tagCount: st.selTags.length,
+      tagList: this.allTags.map(t => ({name:t, style: st.selTags.includes(t)?tagSel:tagUn, onClick:()=>this.toggleTag(t)})),
+      photoList: [0,1,2,3].map(i => ({icon: i===3?'+':'⊠', style: i===photo?phSel:phUn, onClick:()=>this.setState({photo:i})})),
+      optionList: st.options.map(o => ({text:o.text, likes:o.likes, onClick:()=>this.likeOption(o.id)})),
+      wallRef: this.wallRef,
+      flyers: st.flyers.map(f => ({
+        key:f.key, text:f.text, likes:f.likes,
+        style: flyBase + 'top:'+f.top+'px;transform:translateX('+(this._pos[f.key] != null ? this._pos[f.key] : 380)+'px);' + (f.hot ? 'background:#fde3d6;border:1px solid #f0b89e;color:#c2502c' : 'background:#fff;border:1px solid #e8e8e8;color:#444')
+      })),
+      likePct: Math.min(st.taskN/5*100,100)+'%', likeTxt: Math.min(st.taskN,5)+'/5',
+      cName:cd.n, cCls:cd.c, cT1:cd.t1, cT2:cd.t2, cD:cd.d,
+      swLeft: Math.max(3-swipes,0),
+      keTxt: st.ke>0 ? ' '+st.ke : '',
+      goEntry:this.nav('entry'), goCheck:this.nav('check'), goFail:this.nav('fail'), goProf:this.nav('prof'),
+      goReward:this.nav('reward'), goDanmu:this.nav('danmu'), goMsg:this.nav('msg'), goSwipe:this.nav('swipe'),
+      goMut:this.nav('mut'), goSin:this.nav('sin'), goGuar:this.nav('guar'), goPure:this.nav('pure'),
+      goCont:this.nav('cont'), goRpt:this.nav('rpt'), goMel:this.nav('mel'),
+      back:this.back,
+      setLove:()=>this.setState({intent:'love'}),
+      setBud:()=>this.setState({intent:'buddy'}),
+      openTpl:()=>this.setState({tplOpen:true}),
+      closeTpl:()=>this.setState({tplOpen:false}),
+      pickTpl1:()=>this.setState({decl:'等一个并肩看潮光的人',tplOpen:false}),
+      pickTpl2:()=>this.setState({decl:'江湖路远，要不要顺路？',tplOpen:false}),
+      pickTpl3:()=>this.setState({decl:'想找个固定搭子，一起肝日常',tplOpen:false}),
+      pickTpl4:()=>this.setState({decl:'在线蹲一个一起看烟花的',tplOpen:false}),
+      onDecl:(e)=>this.setState({decl:e.target.value}),
+      cardRef:this.cardRef, onCardDown:this.onCardDown, onCardMove:this.onCardMove, onCardUp:this.onCardUp,
+      btnShip:this.btnShip, btnSkip:this.btnSkip,
+      doKe:()=>this.setState(s=>({ke:s.ke+1})),
+      togMenu:()=>this.setState(s=>({menu:!s.menu}))
+    };
+  }
+}
+</script>
+</body>
+</html>
